@@ -1,13 +1,21 @@
 <template lang="pug">
   #app
-    #nav
-      router-link(to="/")
-        i.fa.fa-home
-        |  Home
-        |  |
-      router-link(to="/about") About
-    router-view
+    .vh-100
+      NavPublic
+      router-view
+    MyFooter
 </template>
+<script>
+import NavPublic from "./components/NavPublic"
+import MyFooter from "./components/MyFooter"
+
+export default {
+  components: {
+    NavPublic,
+    MyFooter
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
