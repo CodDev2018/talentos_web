@@ -31,6 +31,11 @@ class AuthStorage {
     get candidatoId() {
         return this.usuario && this.usuario.pessoa && this.usuario.pessoa.candidato ? this.usuario.pessoa.candidato.id : null
     }
+
+    logout() {
+        delete sessionStorage.usuario
+        delete sessionStorage.token
+    }
 }
 
 export default new AuthStorage 
