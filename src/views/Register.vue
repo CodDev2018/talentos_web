@@ -3,14 +3,18 @@
         b-form.col-12.form-sing.pt-5(@submit.prevent='onSubmit')
             p
                 i.fa.fa-user-tie.text-info.fa-5x
-            h1.h3.mb-3.font-weight-normal Entar no Talentos
+            h1.h3.mb-3.font-weight-normal Novo Usuário
             b-alert.text-left(:show='loginError.show' dismissible='' :variant='loginError.severity') {{loginError.message}}
+            
+            b-form-input#inputName(v-model='form.nome' type='text' required='' placeholder='Seu nome completo...')
             b-form-input#inputEmail(v-model='form.email' type='email' required='' placeholder='Seu email...')
             b-form-input#inputPassword(v-model='form.senha' type='password' required='' placeholder='Sua senha...')
+            
             b-button.btn-block.mt-2(type='submit' variant='primary') Enviar
 </template>
 <script>
-import UserResource from "../resources/UserResource"
+import UserResource from "../resources/UserResource";
+import { setTimeout } from 'timers';
 export default {
   data() {
     return {
@@ -20,6 +24,7 @@ export default {
         message: ""
       },
       form: {
+        nome: "",
         email: "",
         password: ""
       }
@@ -27,13 +32,16 @@ export default {
   },
   methods: {
     async onSubmit() {
-        try {
-            await UserResource.login(this.form.email, this.form.senha)
-            this.$router.push('/dashboard')
-        } catch (error) {
-            this.loginError.show = true;
-            this.loginError.message = error.message
-        }
+      try {
+        await UserResource.save(this.form);
+        this.loginError.show = true;
+        this.loginError.severity = "success";
+        this.loginError.message = "Cadastro efetuado com sucesso. Redirecionando para login...";
+        setTimeout(() => this.$router.push('/login'), 3000);
+      } catch (error) {
+        this.loginError.show = true;
+        this.loginError.message = error.message;
+      }
     }
   }
 };
