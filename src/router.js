@@ -27,6 +27,11 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('./views/Dashboard.vue')
+    },
+    {
+      path: '/pessoa',
+      name: 'pessoa',
+      component: () => import('./views/PessoaForm.vue')
     }
   ]
 })
