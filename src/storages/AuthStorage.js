@@ -23,6 +23,14 @@ class AuthStorage {
     get token() {
         return sessionStorage.token
     }
+
+    get pessoaId() {
+        return this.usuario && this.usuario.pessoa ? this.usuario.pessoa.id : null
+    }
+
+    get candidatoId() {
+        return this.usuario && this.usuario.pessoa && this.usuario.pessoa.candidato ? this.usuario.pessoa.candidato.id : null
+    }
 }
 
 export default new AuthStorage 
