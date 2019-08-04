@@ -2,7 +2,7 @@ import ResourceLoader from "./ResourceLoader"
 import AuthStorage from "../storages/AuthStorage"
 
 class UserResource {
-    async getBy(id) {
+    async getById(id) {
         try {
             let user = await ResourceLoader.getProtectedResource("/users/" + id)
             return user
